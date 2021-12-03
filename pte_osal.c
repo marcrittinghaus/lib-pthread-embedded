@@ -212,9 +212,12 @@ static int pte_osInitThread(struct uk_thread *th)
 
 	/* Initialize pte with first thread creation */
 	if (unlikely(!initialized)) {
+		/* Temporarily off to not freak out users */
+#if 0
 		uk_pr_warn("Thread %p created without " STRINGIFY(__LIBNAME__)
 			   " initialized. Utilizing the pthread API from this context may lead to memory leaks.\n",
 			   th);
+#endif
 		return 0;
 	}
 
